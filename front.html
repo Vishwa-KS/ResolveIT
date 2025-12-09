@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - ResolveIT</title>
+    <link rel="stylesheet" href="frontt.css">
+</head>
+
+<body>
+
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+        <!-- ResolveIT Branding -->
+        <header class="brand-header">
+            <div class="logo-wrap">
+                <span class="logo-pill"></span>
+                <h1 class="app-title">ResolveIT</h1>
+            </div>
+            <p class="app-tagline">
+                Smart Grievance &amp; Feedback Management System
+            </p>
+        </header>
+
+        <!-- Login Card -->
+        <main class="card login-card">
+            <h2 class="card-title">Sign in to ResolveIT</h2>
+            <p class="card-subtitle">
+                Login with your registered account or continue as anonymous.
+            </p>
+
+            <div class="form-row">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+            </div>
+
+            <div class="form-row">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+
+            <p class="msg error" id="error-msg"></p>
+
+            <button class="primary-btn" onclick="login()">
+                <span>Login</span>
+                <span class="btn-chevron">➜</span>
+            </button>
+
+            <button class="secondary-btn anonymous-btn" onclick="anonymousLogin()">
+                <span>Login as Anonymous</span>
+            </button>
+
+            <p class="signin-text">
+                Don't have an account?
+                <a href="index.html">Sign up</a>
+            </p>
+        </main>
+    </div>
+
+    <!-- Your API helper (if used elsewhere) -->
+    <script src="api.js"></script>
+
+    <!-- Login logic -->
+    <script src="fronttt.js"></script>
+
+</body>
+
+</html>

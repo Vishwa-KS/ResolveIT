@@ -1,0 +1,12 @@
+com\resolveit\resolveit_backend\model\Feedback.class
+com\resolveit\resolveit_backend\dto\LoginRequest.class
+com\resolveit\resolveit_backend\controller\ComplaintController.class
+com\resolveit\resolveit_backend\controller\UserController.class
+com\resolveit\resolveit_backend\model\Complaint.class
+com\resolveit\resolveit_backend\ResolveitBackendApplication.class
+com\resolveit\resolveit_backend\model\User.class
+com\resolveit\resolveit_backend\repository\FeedbackRepository.class
+com\resolveit\resolveit_backend\controller\FeedbackController.class
+com\resolveit\resolveit_backend\repository\ComplaintRepository.class
+com\resolveit\resolveit_backend\repository\UserRepository.class
+com\resolveit\resolveit_backend\config\GlobalCorsConfig.class

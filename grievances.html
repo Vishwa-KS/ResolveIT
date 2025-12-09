@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints - ResolveIT</title>
+    <link rel="stylesheet" href="grievances.css">
+</head>
+
+<body>
+
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo-wrap">
+                <span class="logo-pill"></span>
+                <h1 class="logo-text">ResolveIT</h1>
+            </div>
+
+            <nav class="topnav">
+                <a href="dashboard.html">Home</a>
+                <a href="grievances.html" class="active">My Complaints</a>
+                <a href="feedback.html">New Complaint</a>
+                <a href="index.html">Logout</a>
+
+                <!-- 🔔 Notifications bell for citizen -->
+                <div class="notif-wrapper">
+                    <button id="notifBell" class="notif-bell" type="button">
+                        🔔
+                        <span id="notifCount" class="notif-count" style="display:none;">0</span>
+                    </button>
+
+                    <!-- Dropdown panel -->
+                    <div id="notifPanel" class="notif-panel">
+                        <div class="notif-panel-header">
+                            <span>Notifications</span>
+                            <button id="markAllReadBtn" type="button">Mark all read</button>
+                        </div>
+                        <div id="notifList" class="notif-list">
+                            <!-- notifications injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Welcome banner -->
+        <section class="welcome-banner">
+            <div>
+                <h2>My Complaints</h2>
+                <p>Here is an overview of your complaints and their current status.</p>
+                <p class="user-email" id="userEmail"></p>
+            </div>
+        </section>
+
+        <!-- Stats cards -->
+        <section class="stats-row">
+            <div class="stat-card stat-total">
+                <p class="stat-label"><b>📊 Total Complaints</b></p>
+                <p class="stat-value" id="totalCount">0</p>
+            </div>
+
+            <div class="stat-card stat-pending">
+                <p class="stat-label"><b>⏳ Pending Complaints</b></p>
+                <p class="stat-value" id="pendingCount">0</p>
+            </div>
+
+            <div class="stat-card stat-resolved">
+                <p class="stat-label"><b>✅ Resolved Complaints</b></p>
+                <p class="stat-value" id="resolvedCount">0</p>
+            </div>
+        </section>
+
+        <!-- Recent complaints table -->
+        <section class="table-section">
+            <div class="table-header">
+                <div>
+                    <h3>Recent Complaints</h3>
+                    <p class="table-subtitle">Your latest complaints with status, priority and actions.</p>
+                </div>
+                <button class="new-complaint-btn" onclick="window.location.href='feedback.html'">
+                    + New Complaint
+                </button>
+            </div>
+
+            <div id="no-data" class="no-data-message">
+                No complaints submitted yet. Click "New Complaint" to raise one.
+            </div>
+
+            <div class="table-wrapper">
+                <table id="grievances-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <!-- ⭐ NEW: Escalation column (same position as admin) -->
+                            <th>Escalation</th>
+                            <th>Attachment</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complaints-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- helper FIRST, then page JS -->
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="grievances.js"></script>
+
+</body>
+</html>

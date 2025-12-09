@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details - ResolveIT</title>
+    <link rel="stylesheet" href="complaint-detail.css">
+</head>
+
+<body>
+
+    <!-- Floating blobs (same vibe as grievances page) -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo">ResolveIT</div>
+            <nav class="topnav">
+                <a href="dashboard.html">Home</a>
+                <a href="grievances.html" class="active">My Complaints</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </header>
+
+        <!-- Main detail layout -->
+        <div class="detail-layout">
+            <!-- Left main column -->
+            <section class="left-pane glass-card">
+
+                <!-- ⭐ Escalation banner for citizen -->
+                <div id="escalationBanner" class="escalation-banner" style="display:none;">
+                    This complaint has crossed its resolution deadline and has been escalated
+                    to the admin team for faster resolution.
+                </div>
+
+                <div class="title-row">
+                    <div>
+                        <h2 id="cTitle">(Complaint title)</h2>
+                        <p class="description-label">DESCRIPTION</p>
+                        <p id="cDescription" class="description-text"></p>
+                    </div>
+
+                    <div class="status-priority">
+                        <span id="cStatus" class="status-badge">STATUS</span>
+                        <span id="cPriority" class="priority-pill">PRIORITY</span>
+                    </div>
+                </div>
+
+                <!-- 🔹 Attachment section (image) -->
+                <div id="attachmentSection" class="attachment-section" style="display: none;">
+                    <div class="attachment-header-row">
+                        <h3>Attachment</h3>
+                    </div>
+                    <div class="attachment-image-wrapper">
+                        <img id="cImage" class="complaint-image" alt="Complaint attachment">
+                    </div>
+                </div>
+
+                <!-- ⭐ NEW: Resolution proof image (read-only) -->
+                <div id="resolutionSection" class="attachment-section" style="display:none;">
+                    <div class="attachment-header-row">
+                        <h3>Resolution Proof</h3>
+                    </div>
+                    <div class="attachment-image-wrapper">
+                        <img id="resolutionImage" class="complaint-image" alt="Resolution proof">
+                    </div>
+                </div>
+
+                <!-- Complaint information block -->
+                <div class="info-section">
+                    <h3>COMPLAINT INFORMATION</h3>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <p class="label">Complaint ID</p>
+                            <p id="cId" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Tracking ID</p>
+                            <p id="cTracking" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Category</p>
+                            <p id="cCategory" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Submitted On</p>
+                            <p id="cSubmitted" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Last Updated</p>
+                            <p id="cLastUpdated" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Resolution Deadline</p>
+                            <p id="cDeadline" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Assigned Officer</p>
+                            <p id="cOfficer" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Reporter</p>
+                            <p id="cReporter" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-section">
+                    <h3>Complaint Timeline</h3>
+                    <div class="timeline">
+                        <div class="timeline-step" id="step-pending">
+                            <div class="circle"></div>
+                            <p>Pending</p>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step" id="step-review">
+                            <div class="circle"></div>
+                            <p>Under Review</p>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step" id="step-resolved">
+                            <div class="circle"></div>
+                            <p>Resolved</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⭐ FEEDBACK BUTTON (only for resolved complaints) -->
+                <button id="openFeedbackBtn" class="primary-btn" style="margin-top: 14px; display:none;">
+                    ⭐ Rate This Resolution
+                </button>
+
+                <!-- ⭐ FEEDBACK MODAL -->
+                <div id="feedbackModal" class="modal-overlay">
+                    <div class="modal-box">
+                        <h3>Rate This Complaint Resolution</h3>
+
+                        <!-- Stars -->
+                        <div id="starRow" class="stars-row">
+                            <span data-value="1" class="star">★</span>
+                            <span data-value="2" class="star">★</span>
+                            <span data-value="3" class="star">★</span>
+                            <span data-value="4" class="star">★</span>
+                            <span data-value="5" class="star">★</span>
+                        </div>
+
+                        <!-- Notes -->
+                        <textarea id="feedbackNotes" placeholder="Write your feedback (optional)..."
+                            class="feedback-textarea"></textarea>
+
+                        <div class="modal-actions">
+                            <button id="cancelFeedbackBtn" class="secondary-btn">Cancel</button>
+                            <button id="submitFeedbackBtn" class="primary-btn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Right side: actions / updates -->
+            <aside class="right-pane glass-card">
+                <h3>Actions</h3>
+
+                <div class="updates-box">
+                    <label class="updates-title">Updates &amp; Notes</label>
+                    <p class="updates-subtitle">Public Updates</p>
+
+                    <div id="cUpdateBubble" class="update-bubble">
+                        <div class="update-header">
+                            <span class="update-author">Admin</span>
+                            <span id="cUpdateTime" class="update-time"></span>
+                        </div>
+                        <p id="cUpdateText" class="update-text"></p>
+                    </div>
+
+                    <p id="noUpdateText" class="no-updates-text">
+                        No public updates yet.
+                    </p>
+                </div>
+
+                <button class="back-btn" onclick="window.location.href='grievances.html'">
+                    ← Back to My Complaints
+                </button>
+            </aside>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="complaint-detail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit New Complaint - ResolveIT</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+
+<body>
+
+    <!-- Floating animated blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo-wrap">
+                <span class="logo-pill"></span>
+                <h1 class="logo-text">ResolveIT</h1>
+            </div>
+
+            <nav class="topnav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="grievances.html">My Complaints</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </header>
+
+        <!-- Form Card -->
+        <section class="form-card">
+            <h2 class="card-title">Submit New Complaint</h2>
+            <p class="subtitle">Fill out the form below to submit your complaint.</p>
+
+            <div class="form-row">
+                <label for="subject">Title *</label>
+                <input type="text" id="subject" placeholder="Brief summary of your complaint">
+            </div>
+
+            <div class="form-row">
+                <label for="description">Description *</label>
+                <textarea id="description" rows="4"
+                          placeholder="Provide detailed information about the issue..."></textarea>
+            </div>
+
+            <div class="form-row two-column">
+                <div>
+                    <label for="category">Category *</label>
+                    <select id="category">
+                        <option value="Sanitation">Sanitation</option>
+                        <option value="Water">Water</option>
+                        <option value="Electricity">Electricity</option>
+                        <option value="Roads">Roads</option>
+                        <option value="Other" selected>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="priority">Priority *</label>
+                    <select id="priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Image attachment (UI only – not sent to backend yet) -->
+            <div class="form-row">
+                <label for="image">Attachment (Optional)</label>
+                <input type="file" id="image" accept="image/*">
+            </div>
+
+            <p id="feedback-error" class="msg error"></p>
+            <p id="feedback-success" class="msg success"></p>
+
+            <div class="button-row">
+                <button class="primary-btn" type="button" onclick="submitFeedback()">
+                    Submit Complaint
+                </button>
+                <button class="secondary-btn" type="button" onclick="window.location.href='dashboard.html'">
+                    Cancel
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="api.js"></script>
+    <script src="feedback.js"></script>
+
+</body>
+
+</html>

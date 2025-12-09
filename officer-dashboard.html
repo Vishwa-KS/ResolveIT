@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Dashboard - ResolveIT</title>
+    <!-- Reuse admin dashboard styles -->
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo">ResolveIT</div>
+            <nav class="topnav">
+                <a href="officer-dashboard.html" class="active">Dashboard</a>
+                <!-- Citizen View removed -->
+                <a href="index.html">Logout</a>
+
+                <!-- 🔔 Notifications bell for officer -->
+                <div class="notif-wrapper">
+                    <button id="notifBell" class="notif-bell" type="button">
+                        🔔
+                        <span id="notifCount" class="notif-count" style="display:none;">0</span>
+                    </button>
+
+                    <!-- Dropdown panel -->
+                    <div id="notifPanel" class="notif-panel">
+                        <div class="notif-panel-header">
+                            <span>Notifications</span>
+                            <button id="markAllReadBtn" type="button">Mark all read</button>
+                        </div>
+                        <div id="notifList" class="notif-list">
+                            <!-- notifications injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Welcome banner -->
+        <section class="welcome-banner">
+            <div>
+                <h2>Welcome back, officer!</h2>
+                <p>Here are the complaints currently assigned to you.</p>
+                <p class="user-email" id="officerEmail"></p>
+            </div>
+        </section>
+
+        <!-- Stats cards -->
+        <section class="stats-row">
+            <div class="stat-card stat-total">
+                <p class="stat-label">Total Assigned</p>
+                <p class="stat-value" id="totalCount">0</p>
+            </div>
+            <div class="stat-card stat-pending">
+                <p class="stat-label">Pending</p>
+                <p class="stat-value" id="pendingCount">0</p>
+            </div>
+            <div class="stat-card stat-resolved">
+                <p class="stat-label">Resolved</p>
+                <p class="stat-value" id="resolvedCount">0</p>
+            </div>
+        </section>
+
+        <!-- Charts row -->
+        <section class="charts-row">
+            <div class="chart-card">
+                <h3>Status Distribution</h3>
+                <canvas id="statusChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>By Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>By Priority</h3>
+                <canvas id="priorityChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Assigned complaints table -->
+        <section class="table-section" id="recent">
+            <div class="table-header">
+                <div>
+                    <h3>Assigned Complaints</h3>
+                    <p class="table-subtitle">Complaints you are responsible for.</p>
+                </div>
+            </div>
+
+            <div id="no-data" class="no-data-message">
+                No complaints assigned to you yet.
+            </div>
+
+            <div class="table-wrapper">
+                <table id="officer-grievances-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <!-- ⭐ NEW: Escalation column (same order as admin) -->
+                            <th>Escalation</th>
+                            <th>Attachment</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody id="officer-grievances-body">
+                        <!-- rows added by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- helper FIRST, then dashboard script -->
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="officer-dashboard.js"></script>
+</body>
+
+</html>

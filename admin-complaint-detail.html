@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Complaint Details - ResolveIT</title>
+    <link rel="stylesheet" href="admin-complaint-detail.css">
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo">ResolveIT Admin</div>
+            <nav class="topnav">
+                <a href="admin-dashboard.html">Dashboard</a>
+                <a href="admin-all.html">All Complaints</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </header>
+
+        <div class="detail-layout">
+
+            <!-- LEFT pane -->
+            <section class="left-pane glass-card">
+
+                <h2 id="cTitle" class="title-text">(Complaint Title)</h2>
+                <p id="cDescription" class="desc-text"></p>
+
+                <!-- Attachment (image) -->
+                <div id="attachmentSection" class="attachment-section" style="display:none;">
+                    <h3 class="attachment-label">Attachment</h3>
+                    <div class="attachment-image-wrapper">
+                        <img id="cImage" class="complaint-image" alt="Complaint attachment">
+                    </div>
+                </div>
+
+                <!-- ⭐ NEW: Resolution Proof (officer uploaded, read-only) -->
+                <div id="resolutionSection" class="attachment-section" style="display:none;">
+                    <h3 class="attachment-label">Resolution Proof</h3>
+                    <div class="attachment-image-wrapper">
+                        <img id="resolutionImage" class="complaint-image" alt="Resolution proof">
+                    </div>
+                </div>
+
+                <!-- Complaint information -->
+                <div class="info-section">
+                    <h3>COMPLAINT INFORMATION</h3>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>ID</label>
+                            <p id="cId"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Category</label>
+                            <p id="cCategory"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Priority</label>
+                            <p id="cPriority"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Status</label>
+                            <p id="cStatus"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Citizen</label>
+                            <p id="cCitizen"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Assigned Officer</label>
+                            <p id="cOfficer"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Created</label>
+                            <p id="cCreated"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Updated</label>
+                            <p id="cUpdated"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Deadline</label>
+                            <p id="cDeadline"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-section">
+                    <h3>COMPLAINT TIMELINE</h3>
+                    <div class="timeline">
+                        <div class="timeline-step" id="step-submitted">
+                            <div class="circle"></div>
+                            <p>Submitted</p>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step" id="step-review">
+                            <div class="circle"></div>
+                            <p>Under Review</p>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step" id="step-progress">
+                            <div class="circle"></div>
+                            <p>In Progress</p>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step" id="step-resolved">
+                            <div class="circle"></div>
+                            <p>Resolved</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- RIGHT pane -->
+            <aside class="right-pane glass-card">
+
+                <h3>Admin Actions</h3>
+
+                <!-- Assign / Deadline / Status / Admin comments -->
+                <div class="admin-section">
+                    <label for="assignOfficerInput">Assign Officer</label>
+                    <select id="assignOfficerInput">
+                        <option value="">-- Select officer --</option>
+                        <option value="officer1">Officer 1</option>
+                        <option value="officer2">Officer 2</option>
+                    </select>
+
+                    <label for="deadlineInput">Deadline</label>
+                    <input type="date" id="deadlineInput">
+
+                    <!-- ✅ New Complaint Status dropdown -->
+                    <label for="statusSelect">Complaint Status</label>
+                    <select id="statusSelect">
+                        <option value="Under Review">Under Review</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved (by admin)</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+
+                    <label for="adminComments">Admin Comments</label>
+                    <textarea id="adminComments" rows="3"></textarea>
+
+                    <button onclick="saveChanges()" class="save-btn">
+                        Save Changes
+                    </button>
+                </div>
+
+                <!-- Escalation section -->
+                <div class="admin-section">
+                    <h4>Escalation</h4>
+
+                    <label for="escalationNotes">Escalation Notes</label>
+                    <textarea id="escalationNotes" rows="3" placeholder="Reason / message for alert"></textarea>
+
+                    <label for="escalationOption">Escalation Option</label>
+                    <select id="escalationOption">
+                        <option value="send-alert">Send alert</option>
+                        <option value="send-alert-extend">Send alert + extend deadline</option>
+                        <option value="send-alert-reassign">Send alert + reassign officer</option>
+                    </select>
+
+                    <p id="escSummary" class="small-hint"></p>
+
+                    <button onclick="submitEscalation()" class="save-btn secondary">
+                        Submit Escalation
+                    </button>
+                </div>
+
+                <!-- Public notes -->
+                <div class="admin-section">
+                    <h4>Public Notes</h4>
+                    <label for="publicNotes">Notes visible as updates</label>
+                    <textarea id="publicNotes" rows="3"
+                        placeholder="Short update that can be shown to citizen/officer"></textarea>
+
+                    <button onclick="savePublicNotes()" class="save-btn secondary">
+                        Save Public Notes
+                    </button>
+                </div>
+
+
+                <!-- ✅ Citizen feedback (read-only) -->
+                <div class="admin-section feedback-view">
+                    <h4>Citizen Feedback</h4>
+
+                    <div class="feedback-rating-row">
+                        <span class="feedback-label">Rating:</span>
+                        <span id="feedbackRatingText" class="feedback-rating-text">
+                            No rating yet.
+                        </span>
+                    </div>
+
+                    <div id="feedbackStars" class="feedback-stars">
+                        <!-- Stars will be filled by JS -->
+                    </div>
+
+                    <label class="feedback-message-label">Feedback Message</label>
+                    <div id="feedbackMessageBox" class="feedback-message-box">
+                        <p id="feedbackMessageText">No feedback submitted yet.</p>
+                    </div>
+                </div>
+
+                <button onclick="window.location.href='admin-dashboard.html'" class="back-btn">
+                    ← Back
+                </button>
+
+            </aside>
+
+        </div>
+
+        <!-- Extend deadline popup -->
+        <div id="extendDeadlineModal" class="modal-overlay">
+            <div class="modal-box">
+                <h3>Extend Deadline</h3>
+                <p>Select a new resolution deadline.</p>
+                <input type="date" id="extendDeadlineInput">
+                <div class="modal-actions">
+                    <button type="button" class="btn-light" onclick="closeExtendModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="confirmExtendDeadline()">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reassign officer popup -->
+        <div id="reassignModal" class="modal-overlay">
+            <div class="modal-box">
+                <h3>Reassign Officer</h3>
+                <p>Select the officer to reassign this complaint to.</p>
+                <select id="reassignOfficerSelect">
+                    <option value="">-- Select officer --</option>
+                    <option value="officer1">Officer 1</option>
+                    <option value="officer2">Officer 2</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="button" class="btn-light" onclick="closeReassignModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="confirmReassignOfficer()">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="admin-complaint-detail.js"></script>
+
+</body>
+
+</html>

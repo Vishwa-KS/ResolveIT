@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details - Officer | ResolveIT</title>
+
+    <!-- Use the same themed CSS you pasted -->
+    <link rel="stylesheet" href="complaint-detail.css">
+</head>
+
+<body>
+
+    <!-- Floating blobs (background) -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo">ResolveIT</div>
+            <nav class="topnav">
+                <a href="officer-dashboard.html" class="active">Dashboard</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </header>
+
+        <!-- Main layout -->
+        <div class="detail-layout">
+
+            <!-- LEFT: complaint details inside glass card -->
+            <section class="left-pane glass-card">
+                <div class="title-row">
+                    <div>
+                        <h2 id="cTitle">(Complaint title)</h2>
+                        <p class="description-label">Description</p>
+                        <p id="cDescription" class="description-text"></p>
+                    </div>
+
+                    <div class="status-priority">
+                        <span id="cStatus" class="status-badge">STATUS</span>
+                        <span id="cPriority" class="priority-pill">PRIORITY</span>
+                    </div>
+                </div>
+
+                <!-- Admin alert for officer -->
+                <div id="adminAlertBox" class="admin-alert-box">
+                    <h3>⚠️ Admin Alert</h3>
+                    <p id="adminAlertMessage">No alerts from admin.</p>
+                    <p class="alert-time" id="adminAlertTime"></p>
+                </div>
+
+                <!-- Original Attachment Section -->
+                <div id="attachmentSection" class="attachment-section" style="display:none;">
+                    <h3>Attachment</h3>
+                    <img id="cImage" class="complaint-image" alt="Complaint attachment">
+                </div>
+
+                <!-- ⭐ NEW: Resolution Proof (read-only preview for officer) -->
+                <div id="resolutionSection" class="attachment-section" style="display:none;">
+                    <h3>Resolution Proof (Uploaded)</h3>
+                    <img id="resolutionImage" class="complaint-image" alt="Resolution proof image">
+                </div>
+
+                <!-- Complaint information -->
+                <div class="info-section">
+                    <h3>Complaint Information</h3>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <p class="label">Complaint ID</p>
+                            <p id="cId" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Tracking ID</p>
+                            <p id="cTracking" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Category</p>
+                            <p id="cCategory" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Submitted On</p>
+                            <p id="cSubmitted" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Last Updated</p>
+                            <p id="cLastUpdated" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Resolution Deadline</p>
+                            <p id="cDeadline" class="value"></p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="label">Assigned Officer</p>
+                            <p id="cOfficer" class="value"></p>
+                        </div>
+                        <div class="info-item">
+                            <p class="label">Reporter</p>
+                            <p id="cReporter" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-section">
+                    <h3>Complaint Timeline</h3>
+                    <div class="timeline">
+                        <div class="timeline-step" id="step-pending">
+                            <div class="circle"></div>
+                            <p>Pending</p>
+                        </div>
+                        <div class="timeline-line"></div>
+
+                        <div class="timeline-step" id="step-review">
+                            <div class="circle"></div>
+                            <p>Under Review</p>
+                        </div>
+                        <div class="timeline-line"></div>
+
+                        <div class="timeline-step" id="step-progress">
+                            <div class="circle"></div>
+                            <p>In Progress</p>
+                        </div>
+                        <div class="timeline-line"></div>
+
+                        <div class="timeline-step" id="step-resolved">
+                            <div class="circle"></div>
+                            <p>Resolved</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT: officer actions inside its own glass card -->
+            <aside class="right-pane glass-card officer-pane">
+                <h3 class="pane-title">Officer Actions</h3>
+
+                <div class="officer-actions-card">
+
+                    <label class="action-label" for="statusSelect">Current Status</label>
+                    <select id="statusSelect">
+                        <option value="Under Review">Under Review</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed (Officer)</option>
+                    </select>
+
+                    <label class="action-label" for="officerNotes">Notes / Progress</label>
+                    <textarea id="officerNotes"
+                        placeholder="Add progress details, field observations, or follow-up notes..."></textarea>
+
+                    <!-- ⭐ NEW: Resolution image upload block -->
+                    <div class="resolution-upload-block">
+                        <label class="action-label" for="resolutionImageInput">
+                            Resolution Proof Image (After Fix)
+                        </label>
+                        <input type="file" id="resolutionImageInput" accept="image/*">
+
+                        <small class="hint-text">
+                            Upload a clear photo showing the issue is resolved. This will be visible to admin and
+                            citizen after verification.
+                        </small>
+
+                        <div id="resolutionPreviewWrapper" class="resolution-preview-wrapper" style="display:none;">
+                            <p class="preview-label">Preview (local, before upload):</p>
+                            <img id="resolutionPreview" class="complaint-image" alt="Resolution preview">
+                        </div>
+
+                        <button type="button" class="secondary-btn" id="uploadResolutionBtn">
+                            Upload Resolution Image
+                        </button>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="primary-btn" id="saveUpdatesBtn">Save Updates</button>
+                        <button class="secondary-btn" id="markCompletedBtn">Mark as Completed</button>
+                    </div>
+
+                    <p id="actionMessage" class="action-message"></p>
+                </div>
+
+                <button class="back-btn" onclick="window.location.href='officer-dashboard.html'">
+                    ← Back to Officer Dashboard
+                </button>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="officer-complaint-detail.js"></script>
+</body>
+
+</html>

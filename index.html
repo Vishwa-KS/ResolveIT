@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join ResolveIT</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Centered ResolveIT Branding -->
+        <header class="brand-header">
+            <div class="logo-wrap">
+                <span class="logo-pill"></span>
+                <h1 class="app-title">ResolveIT</h1>
+            </div>
+            <p class="app-tagline">Smart Grievance &amp; Feedback Management System</p>
+        </header>
+
+        <!-- Centered Card -->
+        <main class="card">
+
+            <h2 class="card-title">Join ResolveIT</h2>
+            <p class="card-subtitle">
+                Create your account to submit, manage, or oversee grievances based on your role.
+            </p>
+
+            <!-- USERNAME -->
+            <div class="form-row">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-row">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+
+            <!-- ROLE -->
+            <div class="form-row">
+                <label for="accountType">Account Type</label>
+                <select id="accountType">
+                    <option value="CITIZEN">Citizen – Submit and track complaints</option>
+                    <option value="OFFICER">Officer – Manage assigned complaints</option>
+                    <option value="ADMIN">Admin – Full system access</option>
+                </select>
+            </div>
+
+            <p id="msg" class="msg"></p>
+
+            <button class="primary-btn" onclick="createAccount()">
+                <span>Create Account</span>
+                <span class="btn-chevron">➜</span>
+            </button>
+
+            <p class="signin-text">
+                Already have an account?
+                <a href="front.html">Sign in</a>
+            </p>
+        </main>
+
+    </div>
+    <script src="api.js"></script>
+
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,695 @@
+/* ===========================
+   THEME VARIABLES (grievances)
+=========================== */
+:root {
+    --bg-dark-1: #0f172a;
+    --bg-dark-2: #1a237e;
+    --bg-dark-3: #3f51b5;
+
+    --accent-pink: #ff6ec7;
+    --accent-gold: #ffcc33;
+    --accent-cyan: #00d4ff;
+
+    --text-main: #f9fafb;
+    --text-muted: #cbd5f5;
+
+    --card-bg: rgba(15, 23, 42, 0.92);
+    --card-border: rgba(148, 163, 184, 0.5);
+
+    --radius-lg: 18px;
+    --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* ===========================
+   RESET
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===========================
+   BACKGROUND
+=========================== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: radial-gradient(circle at top left,
+        var(--bg-dark-3),
+        var(--bg-dark-2) 40%,
+        var(--bg-dark-1) 80%);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* Floating blobs */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.45;
+    z-index: 0;
+    animation: floatBlob 18s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 260px;
+    height: 260px;
+    background: var(--accent-pink);
+    top: -40px;
+    left: -40px;
+}
+
+.blob-2 {
+    width: 280px;
+    height: 280px;
+    background: var(--accent-cyan);
+    bottom: -80px;
+    right: -40px;
+    animation-delay: 3s;
+}
+
+.blob-3 {
+    width: 220px;
+    height: 220px;
+    background: var(--accent-gold);
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    animation-delay: 6s;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, -40px); }
+}
+
+/* ===========================
+   PAGE WRAPPER
+=========================== */
+.page-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1180px;
+    padding: 24px 18px 40px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Shared glass card */
+.glass-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(16px);
+}
+
+/* ===========================
+   TOP BAR
+=========================== */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(120deg, #ffffff, #c5e1ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.topnav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.9rem;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.topnav a.active {
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+.topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--accent-pink), var(--accent-cyan));
+    transition: width 0.2s ease-out;
+}
+
+.topnav a:hover::after {
+    width: 100%;
+}
+
+/* ===========================
+   WELCOME CARD
+=========================== */
+.welcome-card {
+    padding: 18px 20px;
+    margin-bottom: 18px;
+}
+
+.welcome-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.welcome-text {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+}
+
+/* ===========================
+   ACTION CARDS
+=========================== */
+.cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.dash-card {
+    padding: 16px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(148, 163, 184, 0.18);
+    font-size: 1.2rem;
+}
+
+.card-header h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.card-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Primary button */
+.primary-btn {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(120deg, var(--accent-pink), var(--accent-gold));
+    color: #111827;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.95);
+}
+
+.small-btn {
+    padding: 8px 14px;
+}
+
+/* ===========================
+   MODAL – TRACK COMPLAINT
+=========================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-card {
+    width: min(560px, 100% - 32px);
+    padding: 18px 20px 20px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.modal-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.modal-close {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--accent-cyan);
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+/* Input row */
+.track-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.track-input-row input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.75);
+    background: rgba(15, 23, 42, 0.96);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.track-input-row input:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.45);
+}
+
+.track-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Banner + timeline */
+.track-status-wrapper {
+    margin-top: 4px;
+}
+
+.track-banner {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fecaca;
+    margin-bottom: 10px;
+}
+
+.text-escalated {
+    color: #f87171;
+}
+
+/* Vertical timeline */
+.track-timeline {
+    position: relative;
+    padding-left: 26px;
+}
+
+.track-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.track-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.track-icon.in-process {
+    background: rgba(251, 191, 36, 0.95);
+}
+
+.track-icon.review {
+    background: rgba(244, 114, 182, 0.95);
+}
+
+.track-icon.resolved {
+    background: rgba(74, 222, 128, 0.95);
+}
+
+.track-text h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+}
+
+.track-text p {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+}
+
+.track-meta {
+    margin-top: 2px;
+    font-size: 0.8rem;
+}
+
+/* line between steps */
+.track-line {
+    position: relative;
+    margin-left: 15px;
+    margin-bottom: 18px;
+}
+
+.track-line::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(148, 163, 184, 0.6);
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+    .cards-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-card {
+        width: calc(100% - 24px);
+    }
+
+    .track-input-row {
+        flex-direction: column;
+    }
+}
+/* ================================
+   TRACK COMPLAINT BUTTON
+================================ */
+.table-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.track-btn {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(120deg, var(--accent-cyan), var(--accent-pink));
+    color: #0b1020;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.track-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85);
+}
+
+/* ================================
+   TRACK COMPLAINT MODALS
+================================ */
+.track-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 15, 35, 0.82);
+    display: none;             /* JS will switch to flex */
+    justify-content: center;
+    align-items: center;
+    z-index: 4000;
+}
+
+.track-modal-overlay.show {
+    display: flex;
+}
+
+.track-modal-box {
+    width: 100%;
+    max-width: 460px;
+    background: rgba(15, 23, 42, 0.96);
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    padding: 18px 20px 20px;
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(18px);
+    animation: fadeInUp 0.28s ease-out;
+    color: var(--text-main);
+}
+
+.track-modal-box h3 {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.track-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.track-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 6px 0 4px;
+}
+
+.track-select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.track-select:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.45);
+}
+
+.track-error {
+    min-height: 16px;
+    font-size: 0.8rem;
+    color: #fb7185;
+    margin-top: 4px;
+}
+
+/* buttons row in modals */
+.track-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* ================================
+   RESULT MODAL – TIMELINE VIEW
+================================ */
+.track-result-box {
+    max-width: 640px;
+}
+
+.track-status-message {
+    font-size: 0.9rem;
+    margin: 6px 0 10px;
+    color: var(--text-muted);
+}
+
+.track-status-chip-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.status-chip,
+.priority-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+.status-chip {
+    background: #facc15;
+    color: #111827;
+}
+
+.priority-chip {
+    background: rgba(148, 163, 184, 0.25);
+    color: var(--text-main);
+}
+
+/* reuse same colour logic as detail page */
+.status-chip.under-review { background: #facc15; }
+.status-chip.in-progress  { background: #38bdf8; }
+.status-chip.resolved     { background: #4ade80; }
+.status-chip.rejected     { background: #fb7185; }
+.status-chip.completed    { background: #22d3ee; }
+
+.priority-chip.low {
+    background: rgba(22, 163, 74, 0.25);
+    color: #bbf7d0;
+}
+.priority-chip.medium {
+    background: rgba(245, 158, 11, 0.25);
+    color: #fed7aa;
+}
+.priority-chip.high {
+    background: rgba(220, 38, 38, 0.25);
+    color: #fecaca;
+}
+
+/* Timeline */
+.track-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 14px;
+}
+
+.track-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.track-step .dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(148, 163, 184, 0.7);
+    background: transparent;
+    margin-top: 4px;
+}
+
+.track-step .step-text h4 {
+    font-size: 0.92rem;
+    margin-bottom: 2px;
+}
+
+.track-step .step-text p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.track-line {
+    width: 2px;
+    height: 22px;
+    background: rgba(148, 163, 184, 0.5);
+    margin: 0 0 0 7px;
+}
+
+/* active/completed states */
+.track-step.completed .dot {
+    background: #4ade80;
+    border-color: #4ade80;
+}
+.track-step.completed h4 {
+    color: #bbf7d0;
+}
+
+.track-step.active .dot {
+    background: #38bdf8;
+    border-color: #38bdf8;
+}
+.track-step.active h4 {
+    color: #e0f2fe;
+}
+
+/* Meta row */
+.track-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.meta-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 1px;
+}
+
+.meta-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+}

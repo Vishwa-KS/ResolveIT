@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Login - ResolveIT</title>
+    <link rel="stylesheet" href="frontt.css">
+</head>
+
+<body>
+
+    <h1>ResolveIT Smart Grievance And Feedback Management System</h1>
+
+    <div class="login-box">
+        <h2>Officer Login</h2>
+
+        <div class="row">
+            <label>Username:</label>
+            <input type="text" id="officerUsername">
+        </div>
+
+        <div class="row">
+            <label>Password:</label>
+            <input type="password" id="officerPassword">
+        </div>
+
+        <p class="error" id="officer-error"></p>
+
+        <button onclick="officerLogin()">Login</button>
+
+        <p class="admin-link">
+            Not an officer? <a href="index.html">Go to Home Page</a>
+        </p>
+    </div>
+
+    <script src="officer-login.js"></script>
+
+</body>
+
+</html>

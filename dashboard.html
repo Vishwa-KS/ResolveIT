@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - ResolveIT</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- Floating blobs (grievances theme) -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="logo">ResolveIT</div>
+            <nav class="topnav">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="grievances.html">My Complaints</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </header>
+
+        <!-- Welcome / quick info -->
+        <section class="welcome-card glass-card">
+            <h1 class="welcome-title">Welcome, citizen 👋</h1>
+            <p class="welcome-text">
+                Raise a new complaint, view all your complaints, download a CSV report, or track a complaint
+                using its Complaint ID.
+            </p>
+        </section>
+
+        <!-- Top cards row -->
+        <section class="cards-row">
+
+            <!-- Raise New Complaint -->
+            <article class="dash-card glass-card">
+                <div class="card-header">
+                    <span class="card-icon">➕</span>
+                    <div>
+                        <h3>Raise New Complaint</h3>
+                        <p>Submit a new complaint with all required details.</p>
+                    </div>
+                </div>
+                <button class="primary-btn" onclick="window.location.href='feedback.html'">
+                    Start Complaint
+                </button>
+            </article>
+
+            <!-- My Complaints -->
+            <article class="dash-card glass-card">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <div>
+                        <h3>My Complaints</h3>
+                        <p>View the status and history of your complaints.</p>
+                    </div>
+                </div>
+                <button class="primary-btn" onclick="window.location.href='grievances.html'">
+                    Go to My Complaints
+                </button>
+            </article>
+
+            <!-- Download CSV -->
+            <article class="dash-card glass-card">
+                <div class="card-header">
+                    <span class="card-icon">📥</span>
+                    <div>
+                        <h3>Download Report (CSV)</h3>
+                        <p>Export your complaint summary as a CSV file.</p>
+                    </div>
+                </div>
+                <!-- hook this id to your existing CSV JS -->
+                <button class="primary-btn" id="downloadCsvBtn">
+                    Download CSV
+                </button>
+            </article>
+
+            <!-- Track Complaint (opens popup) -->
+            <article class="dash-card glass-card">
+                <div class="card-header">
+                    <span class="card-icon">📍</span>
+                    <div>
+                        <h3>Track Complaint</h3>
+                        <p>Check the progress of a complaint with its ID.</p>
+                    </div>
+                </div>
+                <button class="primary-btn" id="openTrackModalBtn">
+                    Track Now
+                </button>
+            </article>
+        </section>
+
+    </div>
+
+    <!-- ======================= -->
+    <!-- ⭐ Track Complaint – Step 1 (Select complaint) -->
+    <!-- ======================= -->
+    <div id="trackModal" class="track-modal-overlay">
+        <div class="track-modal-box">
+            <h3>Track Complaint</h3>
+            <p class="track-subtitle">
+                Select one of your complaints to view its live status.
+            </p>
+
+            <label for="trackSelect" class="track-label">Select Complaint</label>
+            <select id="trackSelect" class="track-select">
+                <!-- JS will fill options from localStorage -->
+            </select>
+
+            <p id="trackError" class="track-error"></p>
+
+            <div class="track-modal-actions">
+                <button id="trackCancelBtn" type="button" class="secondary-btn">
+                    Cancel
+                </button>
+                <button id="trackNextBtn" type="button" class="primary-btn">
+                    View Status
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= -->
+    <!-- ⭐ Track Complaint – Step 2 (Timeline result) -->
+    <!-- ======================= -->
+    <div id="trackResultModal" class="track-modal-overlay">
+        <div class="track-modal-box track-result-box">
+            <h3 id="trackResultTitle">Complaint Status</h3>
+
+            <p id="trackStatusMessage" class="track-status-message">
+                <!-- JS: nice status message -->
+            </p>
+
+            <div class="track-status-chip-row">
+                <span id="trackStatusChip" class="status-chip">STATUS</span>
+                <span id="trackPriorityChip" class="priority-chip">PRIORITY</span>
+            </div>
+
+            <!-- Timeline -->
+            <div class="track-timeline">
+                <div class="track-step" id="t-step-submitted">
+                    <div class="dot"></div>
+                    <div class="step-text">
+                        <h4>Submitted</h4>
+                        <p>Complaint created by you.</p>
+                    </div>
+                </div>
+                <div class="track-line"></div>
+                <div class="track-step" id="t-step-review">
+                    <div class="dot"></div>
+                    <div class="step-text">
+                        <h4>Under Review</h4>
+                        <p>Being checked by the department.</p>
+                    </div>
+                </div>
+                <div class="track-line"></div>
+                <div class="track-step" id="t-step-progress">
+                    <div class="dot"></div>
+                    <div class="step-text">
+                        <h4>In Progress</h4>
+                        <p>Team is working on your issue.</p>
+                    </div>
+                </div>
+                <div class="track-line"></div>
+                <div class="track-step" id="t-step-resolved">
+                    <div class="dot"></div>
+                    <div class="step-text">
+                        <h4>Resolved</h4>
+                        <p>Issue closed by the authority.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extra meta info -->
+            <div class="track-meta">
+                <div>
+                    <span class="meta-label">Created</span>
+                    <span id="trackCreated" class="meta-value">-</span>
+                </div>
+                <div>
+                    <span class="meta-label">Last Updated</span>
+                    <span id="trackUpdated" class="meta-value">-</span>
+                </div>
+                <div>
+                    <span class="meta-label">Deadline</span>
+                    <span id="trackDeadline" class="meta-value">-</span>
+                </div>
+            </div>
+
+            <div class="track-modal-actions">
+                <button id="trackCloseBtn" type="button" class="primary-btn">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="notifications-helper.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
